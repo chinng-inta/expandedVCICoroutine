@@ -1,6 +1,6 @@
 local functionTable = {}
 
-local function start(func, ...)
+local function startCoroutine(func, ...)
     local co = coroutine.create(func)
     local pair = { co = co, ret = nil }
     
@@ -8,7 +8,7 @@ local function start(func, ...)
     table.insert(functionTable, pair)
 end
 
-local function update()
+local function updateCoroutine()
     local cnt = 0
     for i = 1, #functionTable do
         local co = functionTable[i].co
@@ -28,6 +28,6 @@ end
 
 -- VScodeのインテリセンス(入力予測)を使用するのに必要
 return {
-    start = start,
-    update = update
+    startCoroutine = startCoroutine,
+    updateCoroutine = updateCoroutine
 }
